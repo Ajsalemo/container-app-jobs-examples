@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
 )
@@ -16,7 +17,7 @@ func handleError(err error) {
 
 func main() {
 	// Replace with your Azure Storage connection string
-	client, err := azblob.NewClientFromConnectionString("<YOUR_STORAGE_CONNECTION_STRING>", nil)
+	client, err := azblob.NewClientFromConnectionString(os.Getenv("AZURE_STORAGE_CONNECTION_STRING"), nil)
 	handleError(err)
 
 	pager := client.NewListBlobsFlatPager("general", &azblob.ListBlobsFlatOptions{

@@ -6,7 +6,11 @@ spec:
   # 'completions' determine how many times to run the job. 
   # here, we define two (2) times
   # run 'kubectl get jobs' to validate 'COMPLETIONS'
-  completions: 2
+  minReplicaCount: 1            
+  maxReplicaCount: 1 
+  activeDeadlineSeconds: 1800
+  backoffLimit: 2
+  completions: 1
   template:
     spec:
       containers:
@@ -17,4 +21,3 @@ spec:
         args:
           - index.php
       restartPolicy: Never
-  backoffLimit: 4

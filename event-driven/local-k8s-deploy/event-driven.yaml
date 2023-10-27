@@ -4,6 +4,10 @@ metadata:
   name: event-driven
   namespace: default
 spec:
+  minReplicaCount: 1            
+  maxReplicaCount: 1 
+  activeDeadlineSeconds: 1800
+  backoffLimit: 2
   jobTargetRef:
     template:
       spec:
@@ -15,9 +19,6 @@ spec:
           image: container-app-job-examples-event-driven:latest
           imagePullPolicy: IfNotPresent
         restartPolicy: Never
-    backoffLimit: 4  
-  minReplicaCount: 1            
-  maxReplicaCount: 1            
   triggers:
   - type: azure-blob
     metadata:

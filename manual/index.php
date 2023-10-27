@@ -11,13 +11,23 @@ function getCoindeskCurrentPrices()
         CURLOPT_CONNECTTIMEOUT => 120,    
         CURLOPT_TIMEOUT        => 120,    
         CURLOPT_URL            => $uri,
-        CURLOPT_SSL_VERIFYPEER => false
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_FAILONERROR => true
     ); 
 
     $ch = curl_init();
     curl_setopt_array($ch, $options);
 
     $content = curl_exec($ch);
+    if (curl_errno($ch)) {
+        $error_msg = curl_error($ch);
+    }
+
+    if (isset($error_msg)) {
+        print($error_msg);
+        die(1);
+    }
+
     curl_close($ch);
 
     return $content;

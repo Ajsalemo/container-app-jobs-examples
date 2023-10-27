@@ -3,6 +3,10 @@ kind: CronJob
 metadata:
   name: scheduled
 spec:
+  minReplicaCount: 1            
+  maxReplicaCount: 1 
+  activeDeadlineSeconds: 1800
+  backoffLimit: 2
   # Run every minute
   schedule: "* * * * *"
   jobTemplate:
